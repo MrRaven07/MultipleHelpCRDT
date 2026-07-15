@@ -62,5 +62,4 @@ Roadmap:
 Bibliography:
 - https://crdt.tech/resources
 - https://en.wikipedia.org/wiki/Conflict-free_replicated_data_type
-- 
-- 
+

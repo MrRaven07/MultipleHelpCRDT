@@ -1,0 +1,14 @@
+Containerizare
+Proiect realizat de Corbu Mircea-Florin
+
+Prezentarea are ca scop explicarea detaliata a importantei containerelor.
+
+Idei care trebuiesc atinse:
+Ce sunt containerele?
+De ce sunt importante?
+Cum sunt mai eficiente decat masinile virtuale? De ce sunt mai eficiente? Care este diferenta dintre cele 2?
+Mai multe exemple de aplicatii (Podman, Kubernetes…)
+Cum poate fi folosit? Ce este YAML?
+De ce este docker atat de popular?
+
+
