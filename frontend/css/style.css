@@ -1,0 +1,44 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #30364F;
+    color: #ACBAC4;   /* Text font */
+    font-family: 'Couri er New', Courier, monospace;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+
+/* Classes */
+
+.menu-container {
+    text-align: center; /* Aligns the text inside the box */
+    width: 100%;        
+    max-width: 500px;   /* Stop expading when are reached more than 500px */
+    padding: 20px;      /* Pushes the text away from the edges */
+    z-index: 10;        /* Assures that the container can be seen, as it will be the first container in the z axis */
+}
+
+.title {
+    font-size: 3rem;    /* rem adapts the text to the user's browser font size */   
+    margin-bottom: 50px;
+                        /* Creates an invisible 50px block directly below the title. This ensures that the following item won't be right next to the bottom of the letters */
+}
+
+
+.cursor::after {
+    content: '█'; /* Can be changed with | */
+    animation: blink 1s step-end infinite;
+}
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+}
+

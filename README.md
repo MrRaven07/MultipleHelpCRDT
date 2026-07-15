@@ -9,7 +9,7 @@ The purpose of the project is to let 2 or multiple users type something concurre
 
 
 ---
-### Short explaining of the types of CRTD
+### Short explanation of the types of CRTD
 There are 2 architectures of CRDT:
 - CvRDT (also called `convergent replicated data types`) The whole JSON object is being sent at each modification, then the `merge()` function compares the 2 versions. (Pros&Cons relatively easy to use, but sends all the informatios every time)
 - CmRDT (also called `commutative replicated data types`) Sends just the current action (ex: "Adds 5"). (Pros&Cons Fast at sending, hard to implement and if a message is lost, the users will be desynchronised)
@@ -54,6 +54,23 @@ Roadmap:
 
 --- 
 
+### Possible workflows of the app usage (and storing of the files) (we consider 2 persons, Alice and Bob):
+- Alice opens `localhost:XXXX`. The page redirects her to a new room/subdomain `localhost:XXXX/?doc=super-project`
+- Alice imports her `.json` file she saved previously and the screen populates with text
+- Bob connects to the same link as Alice `localhost:XXXX/?doc=super-project`. The two share the same state because of the WebSocket room
+- They type together, everything being stored localy
+- When they are done, Bob clicks "Download" to save the `.json` to his computer 
+---
+
+### AI usage throughout the project:
+
+Everything in the project has been written by hand, on the keyboard. Even though some things were from an AI response, i've read the answers, thought about how and if the answer is usefull and wrote it again. 
+At least this is the current mentality, we will see how this progresses.
+
+Even though the current `README` might look like it was AI generated, it wasn't. (This might be because in the past i wanted to make `READMEs` more appealing and inspired from AI creations.) 
+
+---
+
 ### Inspirations:
 - Google Docs 
 - https://framapad.org/abc/en/
@@ -62,4 +79,6 @@ Roadmap:
 Bibliography:
 - https://crdt.tech/resources
 - https://en.wikipedia.org/wiki/Conflict-free_replicated_data_type
-
+- Google Gemini - https://gemini.google.com/ :
+    -> For how different parts of languages work
+    -> 
