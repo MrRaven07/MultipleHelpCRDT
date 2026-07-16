@@ -79,7 +79,7 @@ body {
     background-color: transparent;
     color: #ACBAC4;
     border: 3px solid #ACBAC4;
-    padding: 15px 20px;
+    padding: 15px 20px;     /* 15px is for the vertical axis, and 20px is for the horizontal axis*/
     font-size: 1.2 rem;
     font-family: inherit;
     font-weight: bold;
@@ -122,3 +122,86 @@ body {
 .history-section a:hover{
     text-decoration: underline;
 }
+
+
+
+
+
+
+
+
+/* --- EDITOR --- */
+
+.editor-layout {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+}
+
+.workspace {
+    display: flex;
+    flex: 1;
+    width: 100%;
+}
+
+.panel {
+    flex: 1;    /* So the 2 panels will take 50% of the screen */
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.right-panel {
+    border-left: 2px solid #ACBAC4;
+}
+
+
+#editorInput {
+    flex: 1;
+    background-color: transparent;
+    color: #ACBAC4;
+    border: none;
+    outline: none;
+    font-family: inherit;
+    font-size: 1.1rem;
+    resize: none;
+    line-height: 1.5;   /* The space between lines. */
+}
+
+#editorInput::placeholder {
+    color: #AAAAAA;
+}
+
+.markdown-content {
+    flex: 1;
+    overflow-y: auto;   /* Allows scrolling if the markdown gets too long */
+    color: #F0F0DB;
+}
+
+
+.taskbar {
+    height: 70px;
+    border-top: 3px solid #ACBAC4;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+                        /* Pushes the groups to the left and right edges */
+    padding: 0 20px;
+    background-color: #2d3556;
+}
+
+.taskbar-group {
+    display: flex;
+    gap: 15px;
+}
+
+
+/* Overrides the standard .btn for the taskbar */
+.taskbar-btn {
+    padding: 10px 15px;
+    font-size: 1rem;
+    border-width: 2px;
+}
+
+

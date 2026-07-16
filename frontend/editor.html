@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title> MultipleHelper - Editor</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="editor-layout">
+        <div class="workspace">
+            <div class="panel left-panel">
+                <textarea id="editorInput" placeholder="Lorem ipsum dummy text..."></textarea>
+            </div>
+            <div class="panel right-panel">
+                <div id="markdownOutput" class="markdown-content">
+                    <p style="opacity: 0.5;">Markdown preview...</p>
+                </div>
+            </div>
+
+
+        </div>
+            <div class="taskbar">
+                <div class="taskbar-group">
+                    <button id="backBtn" class="btn taskbar-btn">Menu</button>
+                </div>
+                <div class="taskbar-group">
+                    <input type="file" id="fileImport" style="display: none;" accept=".json,.txt">
+                    <button id="importBtn" class="btn taskbar-btn">Import File</button>
+                    <button id="saveBtn" class="btn taskbar-btn">Save File</button>
+                </div>
+            </div>
+
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

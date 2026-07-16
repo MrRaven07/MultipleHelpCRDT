@@ -90,6 +90,22 @@ document.addEventListener('DOMContentLoaded', () => {
 From my understanding, localStorage saves all (and only) the text strings.
 It is persistent.
 localStorage can be seen in the `Inspect tab`, `Application`, and then under the `Storage` section, there is `Local storage`.
+
+---
+
+
+---
+
+**What does this input `<input type="file" id="fileImport" style="display: none;" accept=".json,.txt">` do in `editor.html`?**
+
+
+```
+importBtn.addEventListener('click', () => {
+        fileImport.click();
+    });
+```
+
+
 ---
 
 

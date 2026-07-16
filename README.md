@@ -43,7 +43,7 @@ Things i think that will be difficult:
 ---
 
 Roadmap:
-- [ ] Make a simple dummy starter code for the frontend
+- [x] Make a simple dummy starter code for the frontend
 - [ ] Create the server with Node.js which just receives and sends data between the devices/people connected
 - [ ] Connect the websockets with client-server architecture
 - [ ] Plain text transmission, without CRDT
@@ -51,6 +51,14 @@ Roadmap:
 - [ ] Implement G-Counter
 - [ ] Implement LWW-Register
 - [ ] Implement Tombstoned LWW-Register
+
+- [ ] Implementation of the markdown previewer
+
+---
+
+Bugs:
+- [ ] Scroll of the markdown previewer
+- [ ] 
 
 --- 
 
