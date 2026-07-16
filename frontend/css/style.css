@@ -42,3 +42,83 @@ body {
     50% { opacity: 0; }
 }
 
+
+
+.actions {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;      /* Gap creates an empty space between all the flex items (the childs). */
+}
+
+
+.join-section {
+    display: flex;
+    gap: 10px;
+}
+
+
+.input-box {
+    flex: 1;        /* Let all the flexible items be the same length, regardless of its content (https://www.w3schools.com/cssref/css3_pr_flex.php) */
+    background-color: transparent;
+    border: 3px solid #ACBAC4;
+    color: #ACBAC4;
+    padding: 10px;
+    font-family: inherit;
+    font-size: 1rem;
+    outline: none;
+}
+
+
+.input-box::placeholder {
+    color: #AAAAAA;
+}
+
+
+
+.btn {
+    background-color: transparent;
+    color: #ACBAC4;
+    border: 3px solid #ACBAC4;
+    padding: 15px 20px;
+    font-size: 1.2 rem;
+    font-family: inherit;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #2d3556;
+    color: #0b0b2a;
+}
+
+
+
+
+.history-section {
+    margin-top: 40px;
+    text-align: left; 
+    border-top: 1px solid #ACBAC4;
+    padding-top: 20px;
+}
+
+
+
+
+
+.localSaves {
+    font-size: 1rem;
+    margin-bottom: 15px;
+    opacity: 0.8;
+}
+
+
+.history-section a {
+    color: #F0F0DB;
+    text-decoration: none;
+    display: block; /* The whole row becomes clickable, not just the text */
+    margin-bottom: 10px;
+}
+
+.history-section a:hover{
+    text-decoration: underline;
+}

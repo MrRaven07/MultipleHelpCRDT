@@ -70,3 +70,26 @@ The `@keyframes` part:
 
 
 ---
+
+**When to use id and when to use class in HTML?**
+
+---
+
+---
+**Would the following code be necessary in JS?**
+```
+// Waits for the HTML to fully load before running
+document.addEventListener('DOMContentLoaded', () => {
+});
+```
+
+---
+
+**What is localStorage?**
+
+From my understanding, localStorage saves all (and only) the text strings.
+It is persistent.
+localStorage can be seen in the `Inspect tab`, `Application`, and then under the `Storage` section, there is `Local storage`.
+---
+
+
