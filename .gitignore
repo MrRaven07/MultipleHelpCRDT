@@ -1,0 +1,7 @@
+
+# Forgot to do it once, never again
+node_modules/
+
+
+# Ignore MAC hidden system files
+.DS_Store

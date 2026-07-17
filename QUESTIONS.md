@@ -1,5 +1,6 @@
+## This document contains a part of my questions that i got throughout the development of the project. 
 
----
+
 
 **Explanation of the files:**
 - `index.html` handles the Main Menu / Dashboard (where new rooms can be created)
@@ -108,4 +109,33 @@ importBtn.addEventListener('click', () => {
 
 ---
 
+**How to check the WebSocket server with Burp?**
+
+
+---
+
+**What's the difference between Sockets and WebSockets?**
+
+
+---
+
+**When a client receives data from the Node.js server**
+it receives it as raw buffer data, not string, so the following code will be needed the moment the client receives it:
+
+```
+const messageAsString = rawData.toString();
+```
+
+---
+
+**How can i use another programming language in order to make the CRDT program?**
+
+First thought, was a naive one, "if i'm using websockets to connect to the server, why can't i create a python container (for exmaple), receive, parse and do the operations based on the informations and send them back?".
+Then i though about the nightmare about how things will be connected and that it will be slow (if 5000 would want to connect to the server at once).
+
+I searched more and one thing i found was that one can use any program language he wants as long as it can compile into a `.wasm` file and it will be inserted into the pure html/js ones.
+
+But for the moment the project will stick with plain html/css/js.
+
+---
 

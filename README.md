@@ -43,22 +43,32 @@ Things i think that will be difficult:
 ---
 
 Roadmap:
+
+**High importance**
 - [x] Make a simple dummy starter code for the frontend
-- [ ] Create the server with Node.js which just receives and sends data between the devices/people connected
-- [ ] Connect the websockets with client-server architecture
-- [ ] Plain text transmission, without CRDT
+- [x] Create the server with Node.js WebSockets which just receives and sends data between the devices/people connected
+- [x] Connect the websockets with client-server architecture
+- [x] Plain text transmission, without CRDT
 - [ ] Start of the CvRDT
 - [ ] Implement G-Counter
 - [ ] Implement LWW-Register
 - [ ] Implement Tombstoned LWW-Register
 
+**Medium importance**
 - [ ] Implementation of the markdown previewer
+- [ ] Separate and complete `QUESTIONS.md` and `DETAILS.md`
+- [ ] Try to put the WebSocket server on a docker/podman container
+
+**Low importance**
+- [ ] Change the UI/UX style
+- [ ] Changeable color palettes
+- [ ] Test the application with a large number of containers
 
 ---
 
 Bugs:
 - [ ] Scroll of the markdown previewer
-- [ ] 
+
 
 --- 
 
@@ -80,7 +90,7 @@ Even though the current `README` might look like it was AI generated, it wasn't.
 ---
 
 ### Inspirations:
-- Google Docs 
+- Google Docs - https://docs.google.com/
 - https://framapad.org/abc/en/
 
 --- 
@@ -88,5 +98,7 @@ Bibliography:
 - https://crdt.tech/resources
 - https://en.wikipedia.org/wiki/Conflict-free_replicated_data_type
 - Google Gemini - https://gemini.google.com/ :
-    -> For how different parts of languages work
-    -> 
+    * For how different parts work:
+        + JS
+        + Node.js (WebSockets)
+    * For things that seemed to have a way much more complicated documentation
