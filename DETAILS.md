@@ -35,4 +35,19 @@ When a browser closes the tab, the server erases them from the list.
 
 ---
 
+**What's the difference between CvRDT and CmRDT?**
+_Taken from the `README/md`_
+There are 2 architectures of CRDT:
+- CvRDT (`convergent replicated data types`) The whole JSON object is being sent at each modification, then a merge function compares the 2 versions. 
+Pros & Cons: relatively easy to use, but sends all the informatios every time
+- CmRDT (`commutative replicated data types`) Sends just the current action (ex: "Adds 5"). 
+Pros & Cons Fast at sending, hard to implement and if a message is lost, the users will be desynchronised
+
+---
+
+**How does GCounter works?**
+
+---
+
+
 

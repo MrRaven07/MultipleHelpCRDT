@@ -11,8 +11,10 @@ The purpose of the project is to let 2 or multiple users type something concurre
 ---
 ### Short explanation of the types of CRTD
 There are 2 architectures of CRDT:
-- CvRDT (also called `convergent replicated data types`) The whole JSON object is being sent at each modification, then the `merge()` function compares the 2 versions. (Pros&Cons relatively easy to use, but sends all the informatios every time)
-- CmRDT (also called `commutative replicated data types`) Sends just the current action (ex: "Adds 5"). (Pros&Cons Fast at sending, hard to implement and if a message is lost, the users will be desynchronised)
+- CvRDT (`convergent replicated data types`) The whole JSON object is being sent at each modification, then a merge function compares the 2 versions. 
+Pros & Cons: relatively easy to use, but sends all the informatios every time
+- CmRDT (`commutative replicated data types`) Sends just the current action (ex: "Adds 5"). 
+Pros & Cons Fast at sending, hard to implement and if a message is lost, the users will be desynchronised
 
 #### The following represents methods of implementation:
 
@@ -48,16 +50,23 @@ Roadmap:
 - [x] Make a simple dummy starter code for the frontend
 - [x] Create the server with Node.js WebSockets which just receives and sends data between the devices/people connected
 - [x] Connect the websockets with client-server architecture
-- [x] Plain text transmission, without CRDT
+- [x] Plain text transmission, without CRDT 
 - [ ] Start of the CvRDT
 - [ ] Implement G-Counter
 - [ ] Implement LWW-Register
 - [ ] Implement Tombstoned LWW-Register
 
+
+- [ ] Import and save settings
+- [ ] Persistent informations between reloads of the page (stored efficiently) + locally saved rooms
+
 **Medium importance**
+- [ ] Show in the `editor.html` page whats the name of the room
 - [ ] Implementation of the markdown previewer
 - [ ] Separate and complete `QUESTIONS.md` and `DETAILS.md`
 - [ ] Try to put the WebSocket server on a docker/podman container
+- [ ] See the cursor position of each user with LWW
+
 
 **Low importance**
 - [ ] Change the UI/UX style

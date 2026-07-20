@@ -139,3 +139,24 @@ But for the moment the project will stick with plain html/css/js.
 
 ---
 
+**What's GCounter? (in detail)**
+
+The best explanation i could get for someone that just gets in the subject is the following:
+
+An user is playing an arcade game on a server.
+
+Naive version:
+The users sends information about each point obtained.
+If the user scores 5 points, they send this message to the server, but on the way the connection might glitch and the information could be transmitted multiple times. This rezults in "Add 5 Add 5 Add 5" => Score 15
+
+GCounter version:
+The user sends his total points each time.
+In case that the connection glitches, the users just transmits their maximum points each time. (If there is a packet that has fewer points, it is ignored.)
+
+By sending states, instead of operations, duplicate messages become harmless.
+
+---
+
+**What is Sequence CRDT?**
+
+
