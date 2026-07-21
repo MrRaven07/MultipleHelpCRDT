@@ -4,8 +4,29 @@
 document.addEventListener('DOMContentLoaded', () => {
 
 
+
+    // to let the local synchronise with the room 
+    let isUpdatingFromNetwork = false;
+
+    // Holds the text that has to be sent
+    let pendingText = null;
+    // Prevents multiple timers from running
+    let isTimerRunning = false;
+
+
+
     const editorInput = document.getElementById('editorInput');
     const markdownOuput = document.getElementById('markdownOutput');
+
+    const cmEditor = CodeMirror(editorInput, {
+        lineNumbers: false,
+        lineWrapping: true,
+        value: " # Start here!"
+    });
+
+    markdownOuput.innerHTML = marked.parse(cmEditor.getValue());
+
+
     const backBtn = document.getElementById('backBtn');
     const importBtn = document.getElementById('importBtn');
     const saveBtn = document.getElementById('saveBtn');
@@ -16,10 +37,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const docId = urlParams.get('doc');
 
 
-    let alerted = false;
-
     if (!docId) {
-        alert(`The doc parameters ${window.location.search} is not alright, try to access a new room.`)
+        alert(`The doc parameters ${window.location.search} were not alright, try to access a new room.`)
         window.location.href = 'index.html';
         return;        
     }
@@ -35,9 +54,20 @@ document.addEventListener('DOMContentLoaded', () => {
         // sending the join message
         const joinMessage = {
             type: 'join',
-            docId: docId
+            docId: docId,
+            text: pendingText
         };
 
+        try {
+            socket.send(JSON.stringify(joinMessage));
+        }
+        catch (error) {
+            console.log('The JSON transmitted was invalid');
+            console.log(event.data);
+            console.log(error);
+            alert("The JSON transmitted was invalid")
+            return;
+        }
         // WebSockets cannot parse JSONs so it must be sent as a raw string
         socket.send(JSON.stringify(joinMessage));
     }
@@ -46,7 +76,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // In case of a message is received from the server
     socket.onmessage = (event) => {
 
-
         let incomingData;
         try {
             incomingData = JSON.parse(event.data);
@@ -54,16 +83,19 @@ document.addEventListener('DOMContentLoaded', () => {
         catch (error) {
             console.log('Received invalid JSON');
             console.log(event.data);
+            alert("The JSON received was invalid")
             return;
         }
 
-        console.log(`The JSON received: ${incomingData}`)        
-
         // sync message
-        if (incomingData.type == 'sync'){
-            console.log(`Received data from the server: ${incomingData}`);
-            markdownOuput.innerText = incomingData.text;
-            editorInput.innerTest = incomingData.text;
+        if (incomingData.type === 'sync'){
+            
+            isUpdatingFromNetwork = true;
+
+            cmEditor.setValue(incomingData.text);
+            markdownOuput.innerHTML = marked.parse(incomingData.text);
+
+            isUpdatingFromNetwork = false;            
         }
     };
 
@@ -74,6 +106,57 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
 
+    // Every time there's a change in the div CodeMirror box
+    // instance would be the same as cmEditor. It tells where the change has happened
+    // changeObj tells what happened
+    cmEditor.on("change", (instance, changeObj) => {
+        
+        if(changeObj.origin === 'setValue')return;
+
+        if(isUpdatingFromNetwork)
+            return;
+        
+        // Raw text from the textbox
+        const currentText = cmEditor.getValue();
+
+        // Even though data is transmitted after some time, the keystrokes need to update instantly on the local side
+        markdownOuput.innerHTML = marked.parse(currentText);
+        
+        pendingText = currentText;
+        
+        if(!isTimerRunning) {
+            isTimerRunning = true;
+
+
+            // JS works asynchronously and if the wouldn't have isTimerRunning, the timeout could be ran multiple times
+            setTimeout( () => {
+                
+                if(socket.readyState === WebSocket.OPEN && pendingText !== null) {
+                    const syncMessage = {
+                        type: "sync",
+                        docId: docId,
+                        text: pendingText
+                    };
+                    
+                    try {
+                        socket.send(JSON.stringify(syncMessage));
+                    }
+                    catch (error) {
+                        console.log("Couldn't send the sync JSON message");
+                        console.log(syncMessage);
+                        console.log(error);
+                        alert("Couldn't send the sync JSON message")
+                        return;
+                    }
+                }
+
+                isTimerRunning = false;
+                pendingText = null;
+
+            }, 500); // 500 milliseconds 
+        }
+        
+    });
 
 
 
@@ -105,42 +188,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-    // Gets activated every time the text box changes
-    editorInput.addEventListener('input', () => {
-        const currentText = event.target.value;
 
 
-        if (socket.readyState === WebSocket.OPEN){
-            const syncMessage = {
-                type: 'sync',
-                docId: docId,
-                text: currentText
-            };
-
-            try {
-                let jsonifiedMessage = JSON.stringify(syncMessage);
-                socket.send(jsonifiedMessage);
-                console.log(`The json sent: ${jsonifiedMessage}`);
-            }
-            catch (error) {
-                console.log(`Couldn't sent the json message`);
-                return;
-            }
-            
 
 
-        }
-        else if (alerted === false) {
-            alert("The server is inactive, try to reload the page. What you typed will only be stored locally.");
-            alerted = true;
-        }
-        markdownOuput.innerText = currentText;
-        editorInput.innerText = currentText;
-        
-        // Markdown parser
-        
-
-    });
 
 
 });

@@ -45,9 +45,61 @@ Pros & Cons Fast at sending, hard to implement and if a message is lost, the use
 
 ---
 
-**How does GCounter works?**
+**How does GCounter works and where can it be used?**
 
 ---
 
+**How does LWW works and where can it be used?**
+
+---
+
+**How does CodeMirror work?**
+
+CodeMirror uses a single `<div>` and makes it behave as a textarea block.
+
+It does that with DOM injection. CodeMirror injects 2 layers inside the `<div>`:
+- Creates an invisible `<textarea>` that forces the browser's focus onto it. (This insures that things like spellcheck, copy/paste still work)
+- Creates a lot of `<span>` and `<div>` elements that can be used to style however the user want. First, it takes the keystroke, then deletes it from the box and puts it into the div/span tag.
 
 
+
+`const cmEditor = CodeMirror(editorInput, {`
+- The part with `CodeMirror(...)` calls the library core builder function.
+- `editorInput` is the DOM element where CodeMirror will inject the invisible textarea and the visual stage
+
+
+`lineNumbers: ...,` : tells CodeMirror not to render the vertical line numbering (that appears on almost all code editors)
+
+
+`lineWrapping: true,` : wrap the text to the next line instead of going off-screen
+
+
+`mode: "markdown",` : marks the text as a special and puts it into a `<span>`
+
+`value: " # start "` : Populates the default appearing
+
+
+
+---
+
+**How the formatting appears on the right?**
+
+It doesn't come from CodeMirror. It is a collaboration between CodeMirror and the Marked.js.
+
+The loop that connects the two:
+```javascript
+cmEditor.on("change", () => {
+    // 1. Grab raw text
+    const currentText = cmEditor.getValue();
+    
+    // 2. Parse and render
+    markdownOuput.innerHTML = marked.parse(currentText);
+});
+```
+
+`.on("change")` : gets activated every time a keystroke alters the CodeMirror element
+
+`marked.parse()` : converts Markdown syntax into HTML tags
+ex: `"# Hello world!"` into `<h1>Hello world</h1>` 
+
+---

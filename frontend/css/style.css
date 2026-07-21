@@ -7,7 +7,7 @@
 body {
     background-color: #30364F;
     color: #ACBAC4;   /* Text font */
-    font-family: 'Couri er New', Courier, monospace;
+    font-family: 'Courier New', Courier, monospace;
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -205,3 +205,40 @@ body {
 }
 
 
+
+
+#editorContainer {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+}
+
+
+
+
+
+
+/* CodeMirror overrides */
+.CodeMirror {
+    flex: 1;
+    height: auto;
+    background-color: transparent !important;
+    color: #ACBAC4 !important;
+    font-family: 'Courier New', Courier, monospace !important;
+    font-size: 1.1rem;
+}
+
+.CodeMirror * { /* Inherit everything from the parent, that being the body */
+    font-family: inherit !important; 
+    color: inherit !important;
+}
+
+
+.CodeMirror-cursor {
+    border-left: 2px solid #ACBAC4 !important;
+}
+
+.CodeMirror-scroll{
+    border: none;
+    outline: none;
+}

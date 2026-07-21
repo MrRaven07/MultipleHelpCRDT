@@ -11,6 +11,8 @@
 
 **What does `<!DOCTYPE html>` do?**
 
+`<!DOCTYPE html>` is the declaration for HTML5 (Standard Mode). If it doesn't exist, the browser assumes the page was built in 1990-2000. (Quirks Mode)
+
 ---
 
 **How does `display: flex` work?**
@@ -74,6 +76,14 @@ The `@keyframes` part:
 
 **When to use id and when to use class in HTML?**
 
+1. `class` is for multiple, reusable elements. Good to use when one wants to repeat a style or behaviour across the page.
+2. `id` is for a single element, one id name per HTML page
+    It's rarely used for CSS styling `#editor-input` , as CSS makes it hard for it to be overwritten in the future.
+    It's good to use `id` for the following things:
+    + JS hooks `document.getElementById('submit-btn')`
+    + Anchor links `<a href="#contact-links">
+
+
 ---
 
 ---
@@ -84,6 +94,24 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 ```
 
+Browsers read HTML documents from top to bottom, if it encounters a `<script>` tag, it pauses the reading from the HTML and executes the JavaScript.
+
+If the browser find `<script>` in the head, it will be ran even before the `<body>` exists.
+
+So, the listener `DOMContentLoaded` waits for the whole HTML file to load and only after that, runs the JavaScript.
+
+Some other variants would be:  
+```html
+<head>
+<script src="app.js" defer></script>
+</head>
+```
+`defer` tells the browser to downlaod the JavaScript file in the background while reading the HTML and guarantees that the script will execute only after the HTML is fully parsed.
+
+
+Or put the `<script src="app.js"></script>` at the bottom of the body.
+
+
 ---
 
 **What is localStorage?**
@@ -91,8 +119,6 @@ document.addEventListener('DOMContentLoaded', () => {
 From my understanding, localStorage saves all (and only) the text strings.
 It is persistent.
 localStorage can be seen in the `Inspect tab`, `Application`, and then under the `Storage` section, there is `Local storage`.
-
----
 
 
 ---

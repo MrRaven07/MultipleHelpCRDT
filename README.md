@@ -9,7 +9,7 @@ The purpose of the project is to let 2 or multiple users type something concurre
 
 
 ---
-### Short explanation of the types of CRTD
+### Short explanation on the types of CRDT
 There are 2 architectures of CRDT:
 - CvRDT (`convergent replicated data types`) The whole JSON object is being sent at each modification, then a merge function compares the 2 versions. 
 Pros & Cons: relatively easy to use, but sends all the informatios every time
@@ -62,7 +62,7 @@ Roadmap:
 
 **Medium importance**
 - [ ] Show in the `editor.html` page whats the name of the room
-- [ ] Implementation of the markdown previewer
+- [x] Implementation of the markdown previewer (changed the textarea box with CodeMirror library)
 - [ ] Separate and complete `QUESTIONS.md` and `DETAILS.md`
 - [ ] Try to put the WebSocket server on a docker/podman container
 - [ ] See the cursor position of each user with LWW

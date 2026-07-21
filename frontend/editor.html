@@ -3,13 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title> MultipleHelper - Editor</title>
+    
+    
+    <link rel="stylesheet" href="lib/codemirror.min.css">    
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <div class="editor-layout">
         <div class="workspace">
             <div class="panel left-panel">
-                <textarea id="editorInput" placeholder="Lorem ipsum dummy text..."></textarea>
+                <!-- <textarea id="editorInput" placeholder="Lorem ipsum dummy text..."></textarea> -->
+            
+                <div id="editorContainer">
+                    <div id="editorInput" style="flex: 1;">  </div>
+                </div>
+                
+            
             </div>
             <div class="panel right-panel">
                 <div id="markdownOutput" class="markdown-content">
@@ -31,6 +40,15 @@
             </div>
 
     </div>
+
+    
+    <script src="lib/codemirror.min.js"></script>
+    
+
+    <!-- Markdown previewer for the CodeMirror, in the left panel -->
+    <!-- <script src="lib/markdown.min.js"></script> -->
+    <script src="lib/marked.min.js"></script>
+    
 
     <script src="js/app.js"></script>
 </body>
