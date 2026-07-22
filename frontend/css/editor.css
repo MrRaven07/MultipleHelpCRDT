@@ -1,0 +1,132 @@
+
+/* Overall Layout Aspect */
+
+.editor-layout {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+}
+
+.workspace {
+    display: flex;
+    flex: 1;
+    width: 100%;
+}
+
+.panel {
+    flex: 1;    /* So the 2 panels will take 50% of the screen */
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.right-panel {
+    border-left: 2px solid #ACBAC4;
+}
+
+
+#editorContainer {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+}
+
+#editorInput {
+    flex: 1;
+    background-color: transparent;
+    color: #ACBAC4;
+    border: none;
+    outline: none;
+    font-family: inherit;
+    font-size: 1.1rem;
+    resize: none;
+    line-height: 1.5;   /* The space between lines. */
+}
+
+#editorInput::placeholder {
+    color: #AAAAAA;
+}
+
+.markdown-content {
+    flex: 1;
+    overflow-y: auto;   /* Allows scrolling if the markdown gets too long */
+    color: #F0F0DB;
+
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-all;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* Taskbar */
+
+.taskbar {
+    height: 70px;
+    border-top: 3px solid #ACBAC4;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+                        /* Pushes the groups to the left and right edges */
+    padding: 0 20px;
+    background-color: #2d3556;
+}
+
+.taskbar-group {
+    display: flex;
+    gap: 15px;
+}
+
+.taskbar-btn {
+    /* Overrides the standard .btn for the taskbar */
+    padding: 10px 15px;
+    font-size: 1rem;
+    border-width: 2px;
+}
+
+
+
+
+
+
+
+/* CodeMirror overrides */
+.CodeMirror {
+    flex: 1;
+    height: auto;
+    background-color: transparent !important;
+    color: #ACBAC4 !important;
+    font-family: 'Courier New', Courier, monospace !important;
+    font-size: 1.1rem;
+}
+
+.CodeMirror * { /* Inherit everything from the parent, that being the body */
+    font-family: inherit !important; 
+    color: inherit !important;
+}
+
+.CodeMirror-wrap pre.CodeMirror-line,
+.CodeMirror-wrap pre.CodeMirror-line-like {
+    word-break: break-all !important;
+    overflow-wrap: break-all !important;
+    white-space: pre-wrap !important;
+}
+
+
+.CodeMirror-cursor {
+    border-left: 2px solid #ACBAC4 !important;
+}
+
+.CodeMirror-scroll{
+    border: none;
+    outline: none;
+}

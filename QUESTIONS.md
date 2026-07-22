@@ -186,3 +186,33 @@ By sending states, instead of operations, duplicate messages become harmless.
 **What is Sequence CRDT?**
 
 
+---
+
+**How do data types work in JS?**
+
+There are 2 types:
+- Primitives:
+    + Types: String, Number, Boolean, Undefined, Null, Symbol, BigInt
+- References:
+    + Object(`{}`), Array(`[]`), Function -> These store collections of data and are also mutable (the values inside can be changed without destroying the container)
+
+```js
+let cursorMapLWW = {};
+```
+This is an object, an array would have `[]`, and an object (acts like a map) uses `{}`. It holds unordered key-value pairs based on the names.
+
+
+---
+
+**More about node.js**
+
+---
+
+**What about the js programming models?**
+
+I found 2 models that could be used for a good looking and scalable project:
+- The Global Namespace Pattern
+- ES6 Modules Pattern
+
+
+---

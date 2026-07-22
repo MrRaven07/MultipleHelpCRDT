@@ -6,7 +6,8 @@
     
     
     <link rel="stylesheet" href="lib/codemirror.min.css">    
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/shared_style.css">
+    <link rel="stylesheet" href="css/editor.css">
 </head>
 <body>
     <div class="editor-layout">
@@ -42,15 +43,14 @@
     </div>
 
     
-    <script src="lib/codemirror.min.js"></script>
+    <script src="lib/codemirror.min.js" defer></script>
+    <script src="lib/marked.min.js" defer></script>
     
 
-    <!-- Markdown previewer for the CodeMirror, in the left panel -->
-    <!-- <script src="lib/markdown.min.js"></script> -->
-    <script src="lib/marked.min.js"></script>
-    
-
-    <script src="js/editor.js"></script>
-    <!-- <script src="js/network.js"></script> -->
+    <script src="js/app.js" defer></script>
+    <script src="js/utils.js" defer></script>
+    <script src="js/network_editor.js" defer></script>
+    <script src="js/UI_editor.js" defer></script>
+    <script src="js/main_editor.js" defer></script>
 </body>
 </html>

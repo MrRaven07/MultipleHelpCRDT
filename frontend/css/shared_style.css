@@ -1,0 +1,33 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #30364F;
+    color: #ACBAC4;   /* Text font */
+    font-family: 'Courier New', Courier, monospace;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+
+.btn {
+    background-color: transparent;
+    color: #ACBAC4;
+    border: 3px solid #ACBAC4;
+    padding: 15px 20px;
+    font-size: 1.2rem; /* Fixed the space between 1.2 and rem */
+    font-family: inherit;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #2d3556;
+    color: #0b0b2a;
+}

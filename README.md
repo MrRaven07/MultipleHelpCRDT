@@ -60,18 +60,17 @@ Roadmap:
 - [ ] Implement G-Counter for the total number of keystrokes for each user
 - [ ] See the cursor position of each user with LWW
 - [ ] Implement Tombstoned LWW-Register
-
-
 - [ ] Import and save settings
 - [ ] Persistent informations between reloads of the page (stored efficiently) + locally saved rooms
 - [ ] Server side simulation of the delay in transmitting data and the repercussions in the frontend
+- [ ] Dropdown where will appear all the user names
+- [ ] Show in the `editor.html` page whats the name of the room
 
 **Medium importance**
-- [ ] Show in the `editor.html` page whats the name of the room
 - [x] Implementation of the markdown previewer (changed the textarea box with CodeMirror library)
 - [ ] Separate and complete `QUESTIONS.md` and `DETAILS.md`
 - [ ] Try to put the WebSocket server on a docker/podman container
-
+- [ ] Separation of the `style.css` files for `index.html` and `editor.html`
 
 **Low importance**
 - [ ] Change the UI/UX style
