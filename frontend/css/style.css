@@ -177,6 +177,10 @@ body {
     flex: 1;
     overflow-y: auto;   /* Allows scrolling if the markdown gets too long */
     color: #F0F0DB;
+
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-all;
 }
 
 
@@ -231,6 +235,13 @@ body {
 .CodeMirror * { /* Inherit everything from the parent, that being the body */
     font-family: inherit !important; 
     color: inherit !important;
+}
+
+.CodeMirror-wrap pre.CodeMirror-line,
+.CodeMirror-wrap pre.CodeMirror-line-like {
+    word-break: break-all !important;
+    overflow-wrap: break-all !important;
+    white-space: pre-wrap !important;
 }
 
 

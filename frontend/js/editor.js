@@ -1,8 +1,53 @@
 
+function generateUser() {
+    
+    // The following 2 were inspired by AI
+    const adjectives = [
+        'Glitchy', 'Overclocked', 'Laggy', 'Deprecated', 'Headless', 'Throttled', 'Bootlooping',
+        'Pixelated', 'Encrypted', 'Buggy', 'Hardcoded', 'Bypassed', 'Frozen', 'Bricked',
+        'Zipped', 'Cached', 'Caffeinated', 'Derpy', 'Sweaty', 'Chunky', 'Sassy', 'Wobbly',
+        'Squeaky', 'Grumpy', 'Fluffy', 'Majestic', 'Awkward', 'Zesty', 'Snarky', 'Jittery',
+        'Panicking', 'Soggy', 'Crusty', 'Wacky', 'Bouncy', 'Sneaky', 'Dizzy', 'Fidgety',
+        'Lopsided', 'Noodly', 'Radioactive', 'Sputtering', 'Screaming', 'Leaky', 'Smelly',
+        'Dazzling', 'Baffled', 'Giggling', 'Hiccuping', 'Jumbled'
+    ];
+    
+    const nouns = [
+        'Docker', 'Battery', 'USB', 'Dongle', 'Bug', 'Server', 'Router', 'Keyboard',
+        'Algorithm', 'Cache', 'Cookie', 'Motherboard', 'Floppy', 'Pixel', 'Repo',
+        'Firewall', 'Database', 'Packet', 'Modem', 'Syntax', 'Terminal', 'Kernel',
+        'Sandbox', 'Compiler', 'Byte', 'Framework', 'Node', 'Socket', 'Cloud',
+        'Malware', 'Exception', 'Pointer', 'Stack', 'Capacitor', 'Transistor',
+        'Penguin', 'Sloth', 'Badger', 'Wombat', 'Platypus', 'Weasel', 'Alpaca',
+        'Capybara', 'Lemur', 'Meerkat', 'Opossum', 'Otter', 'Raccoon', 'Walrus', 'Yeti'
+    ];
+    
+    const randomAdj = adjectives[Math.floor(Math.random() * adjectives.length)];
+    const randomNoun = nouns[Math.floor(Math.random() * adjectives.length)];
+    
+    const r = Math.floor(Math.random() * 256);
+    const g = Math.floor(Math.random() * 256);
+    const b = Math.floor(Math.random() * 256);
+    const toHex = (num) => num.toString(16).padStart(2, '0');
+    
+    const randomColor = `#${toHex(r)}${toHex(g)}${toHex(b)}`;
+
+    // From 100 to 1000
+    const randomNumber = Math.floor(Math.random() * 900) + 100;
+    return {
+        id: `${randomAdj}${randomNoun}${randomNumber}`,
+        color: randomColor
+    }
+}
+
+
+
 // Added this part that checks first if all the HTML parts were loaded first
 // in order that we can return from it if some things go wrong
 document.addEventListener('DOMContentLoaded', () => {
 
+    const myUserDetails = generateUser();    
+    let cursorMapLWW = {};
 
 
     // to let the local synchronise with the room 
@@ -73,7 +118,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // In case of a message is received from the server
+
+
+
+    // When a message was received from the server
     socket.onmessage = (event) => {
 
         let incomingData;
@@ -87,8 +135,10 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // sync message
+        // sync/update on the text
         if (incomingData.type === 'sync'){
+
+            console.log("sync");
             
             isUpdatingFromNetwork = true;
 
@@ -97,6 +147,47 @@ document.addEventListener('DOMContentLoaded', () => {
 
             isUpdatingFromNetwork = false;            
         }
+
+        if (incomingData.type === 'sync_cursor'){
+
+            console.log("sync_cursor");
+
+            const userId = incomingData.userId;
+            const position = incomingData.position;
+            const timestamp = incomingData.timestamp;
+            const color = incomingData.color;
+
+            // Ignoring the cursor of self (even though the server verifies the ) 
+            if(userId === myUserDetails.id)
+                return;
+
+            // If the user cursor doesn't yet exist or the timestamp is smaller than the one received
+            if(!cursorMapLWW[userId] || cursorMapLWW[userId].timestamp < timestamp) {
+
+                // if this user already has a cursor on the screen, remove it
+                if(cursorMapLWW[userId] && cursorMapLWW[userId].marker) {
+                    cursorMapLWW[userId].marker.clear();
+                }
+
+                const cursorElement = document.createElement('span');
+                cursorElement.className = 'remote-cursor'
+                cursorElement.style.borderLeft = `2px solid ${color || '#ff0000'}`;
+                cursorElement.style.height = '1.2em';
+                cursorElement.style.display = 'inline-block';
+
+
+                const newMarker = cmEditor.setBookmark(position, { widget: cursorElement });
+                
+                cursorMapLWW[userId] = {
+                    timestamp: timestamp,
+                    marker: newMarker
+                };
+            }
+        }
+
+
+
+
     };
 
     // In case that the servers crashes
@@ -104,6 +195,41 @@ document.addEventListener('DOMContentLoaded', () => {
         console.warn("The server is inactive");
         alert("The server is inactive, try to reload the page");
     };
+
+
+
+
+
+
+    cmEditor.on("cursorActivity", () => {
+        
+        const cursorPos = cmEditor.getCursor();
+
+        const cursorMessage = {
+            type: "sync_cursor",
+            docId: docId,
+            userId: myUserDetails.id,
+            color: myUserDetails.color,
+            position: cursorPos,
+            timestamp: Date.now()
+        };
+
+        if (socket.readyState === WebSocket.OPEN) {
+            try {
+                socket.send(JSON.stringify(cursorMessage));
+            }
+            catch (error) {
+                console.log("Couldn't send the cursor activity");
+                console.log(cursorMessage);
+                console.log(error);
+                alert("Couldn't send the cursor activity")
+                return;
+            }
+        }
+
+
+
+    });
 
 
     // Every time there's a change in the div CodeMirror box
@@ -153,7 +279,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 isTimerRunning = false;
                 pendingText = null;
 
-            }, 500); // 500 milliseconds 
+            }, 100); // milliseconds 
         }
         
     });

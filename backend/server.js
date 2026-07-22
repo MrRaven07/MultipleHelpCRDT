@@ -62,7 +62,7 @@ wss.on('connection', (ws) => {
         }
 
         // in case that an user tries to synchronize
-        else if (parsedMessage.type == 'sync'){
+        else if (parsedMessage.type == 'sync' || parsedMessage.type == 'sync_cursor' ){
             
             // if the user tries to send data without joining a room, return
             if(!currentRoom)return;
@@ -77,6 +77,8 @@ wss.on('connection', (ws) => {
                     client.send(messageAsString); 
             });
         }
+
+
 
     });
 

@@ -30,6 +30,11 @@ Registers (Stores a single value):
 
 ---
 
+### LLW (last write wins) implementation for the cursor position of the users
+
+
+---
+
 Things i think that will be difficult:
 - the communication between different devices
 - the UI (i will choose vanilla css/js as other frontend frameworks seem to be beyond the project scope)
@@ -51,33 +56,34 @@ Roadmap:
 - [x] Create the server with Node.js WebSockets which just receives and sends data between the devices/people connected
 - [x] Connect the websockets with client-server architecture
 - [x] Plain text transmission, without CRDT 
-- [ ] Start of the CvRDT
-- [ ] Implement G-Counter
-- [ ] Implement LWW-Register
+- [ ] ~~Start of the CvRDT~~ (will have to implement sequence CRDT in the future)
+- [ ] Implement G-Counter for the total number of keystrokes for each user
+- [ ] See the cursor position of each user with LWW
 - [ ] Implement Tombstoned LWW-Register
 
 
 - [ ] Import and save settings
 - [ ] Persistent informations between reloads of the page (stored efficiently) + locally saved rooms
+- [ ] Server side simulation of the delay in transmitting data and the repercussions in the frontend
 
 **Medium importance**
 - [ ] Show in the `editor.html` page whats the name of the room
 - [x] Implementation of the markdown previewer (changed the textarea box with CodeMirror library)
 - [ ] Separate and complete `QUESTIONS.md` and `DETAILS.md`
 - [ ] Try to put the WebSocket server on a docker/podman container
-- [ ] See the cursor position of each user with LWW
 
 
 **Low importance**
 - [ ] Change the UI/UX style
 - [ ] Changeable color palettes
-- [ ] Test the application with a large number of containers
+- [ ] Test the application with a large number of containers (users)
 
 ---
 
 Bugs:
 - [ ] Scroll of the markdown previewer
-
+- [x] When a long word appears (ex: AAAAAAAAAAAAAAAAAA) it doesn't wrap to the next line, instead it pushes the `<div>` on the right.
+- [ ] 3 users connected, they type for some time, but suddenly one of the users disconnects and the page refreshes. Upon reconnect this user won't have the latest version and if they write something, the context refreshes to all the other instances. (THIS IS PRE SAVING AND CRDT LOGIC) 
 
 --- 
 
