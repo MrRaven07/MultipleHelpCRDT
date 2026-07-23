@@ -1,6 +1,4 @@
 
-
-
 App.Editor.init = () => {
     const editorInput = document.getElementById('editorInput');
     const markdownOuput = document.getElementById('markdownOutput');
@@ -41,7 +39,6 @@ App.Editor.init = () => {
             }
         }
     });
-
 
 
 
@@ -126,6 +123,37 @@ App.Editor.init = () => {
         // JSON blob parsing
     });
 
+
+
+    const saveMdBtn = document.getElementById('saveMdBtn');
+    const savePdfBtn = document.getElementById('savePdfBtn');
+
+
+    saveMdBtn.addEventListener('click', () => {
+        const rawText = App.cmEditor.getValue();
+        const blob = new Blob([rawText], {type: 'text/markdown' });
+        const url = URL.createObjectURL(blob);
+
+        const downloadLink = document.createElement('a');
+        downloadLink.href = url;
+        console.log(downloadLink);
+        downloadLink.download = `${App.State.docId}.md`;
+        // This creates an <a> tag and then fakes a mouse click 
+        // (this happens because some web browsers ignore a click made by the program)
+
+
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        URL.revokeObjectURL(url);
+        // Browsers keep Blob files active in RAM as long as the temporary URL exists.
+
+    });
+
+    savePdfBtn.addEventListener('click', () => {
+        window.print();
+        // the rest of the logic is in the CSS
+        // to print just the markdown
+    });
 
 
 

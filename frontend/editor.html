@@ -13,8 +13,6 @@
     <div class="editor-layout">
         <div class="workspace">
             <div class="panel left-panel">
-                <!-- <textarea id="editorInput" placeholder="Lorem ipsum dummy text..."></textarea> -->
-            
                 <div id="editorContainer">
                     <div id="editorInput" style="flex: 1;">  </div>
                 </div>
@@ -35,18 +33,19 @@
                     
                     <div class="roster-container">
                         <button id="rosterBtn" class="btn taskbar-btn"> Users </button>
-                        <div id="rosterList" class="roster-dropdown hidden">
-                            <!-- All the joining users will be inserted here -->
-                        </div>
+                        <div id="rosterList" class="roster-dropdown hidden"><!-- All the joining users will be inserted here --></div>
                     </div>
-                </div>
 
-                <div id="roomNameDisplay" class="room-display"></div>
+                    <div id="roomNameDisplay" class="room-display"></div>
+                </div>
+                
 
                 <div class="taskbar-group">
                     <input type="file" id="fileImport" style="display: none;" accept=".json,.txt">
-                    <button id="importBtn" class="btn taskbar-btn">Import File</button>
-                    <button id="saveBtn" class="btn taskbar-btn">Save File</button>
+                    <button id="importBtn" class="btn taskbar-btn">Import Conf File</button>
+                    <button id="saveBtn" class="btn taskbar-btn">Save Conf File</button>
+                    <button id="saveMdBtn" class="btn taskbar-btn">Save .md</button>
+                    <button id="savePdfBtn" class="btn taskbar-btn">Save .pdf</button>
                 </div>
             </div>
 

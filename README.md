@@ -71,6 +71,7 @@ Roadmap:
 - [ ] Try to put the WebSocket server on a docker/podman container
 - [x] Separation of the `style.css` files for `index.html` and `editor.html`
 - [ ] Server side simulation of the delay in transmitting data and the repercussions in the frontend
+- [ ] Make the UI of the scrollbar more appealing (improve the default UI)
 
 **Low importance**
 - [ ] Change the UI/UX style

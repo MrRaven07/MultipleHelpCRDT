@@ -31,6 +31,22 @@ When `display: flex` is on, the normal rules don't apply really apply anymore, b
 
 ---
 
+**Why is `flex-end` necessary?**
+
+Without flex-end:
+The right container stretches, but the buttons stay on the left side of that stretched space.
+
+`[Left_Btns      ] [ Room Display ] [Right_Btns     ]`
+
+With flex-end:
+The right container stretches, and the buttons are forced to the far right edge of that space.
+
+`[Left_Btns      ] [ Room Display ] [     Right_Btns]`
+
+(This was before the Room Name was pushed in the left part of the taskbar. This was done because the room name didn't align with the middle line)
+
+---
+
 **What is `rem`?**
 
 `rem` stands for `Root EM`.

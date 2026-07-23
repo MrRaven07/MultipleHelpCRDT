@@ -113,7 +113,9 @@
 .taskbar-group {
     display: flex;
     gap: 15px;
+    align-items: center;
 }
+
 
 .taskbar-btn {
     /* Overrides the standard .btn for the taskbar */
@@ -147,7 +149,6 @@
 
     background-color: #2d3556;
     border: 2px solid #ACBAC4;
-    /* border-radius: 5px; */
     padding: 10px;
     width: max-content;
     min-width: 150px;
@@ -189,14 +190,54 @@
     font-weight: bold;
     letter-spacing: 1px;
 
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    white-space: nowrap;    /* No wrapping to a second line */
+    overflow: hidden;       /* Hides the text that comes out of the box */
+    text-overflow: ellipsis;/* Adds "..." if the text gets cut off */
+
+    display: flex;
+    align-items: center;
+
+    padding: 5px 20px;
+    border-left: 2px solid #ACBAC4;
+    border-right: 2px solid #ACBAC4;
+    text-align: center;
 }
 
 
 
 
+
+
+/* For printing of the markdown */
+
+
+@media print {
+    .left-panel, .taskbar, .room-display {
+        display: none !important;
+    }
+    ::-webkit-scrollbar{
+        display: none !important;
+    }
+    
+    body, html, .editor-layout, .workspace, .panel, #markdownOutput {
+        background-color: white !important;
+        background: white !important;
+        border: none !important;
+    }
+
+    #markdownOutput {
+        color: black !important;
+        padding: 0 !important;
+    }
+
+    body, html, .editor-layout, .workspace, .panel, #markdownOutput {
+        height: auto !important;
+        min-height: auto !important;
+        overflow: visible !important;
+        display: block !important;
+    }
+
+}
 
 
 
@@ -241,3 +282,7 @@
     overflow-y: auto !important;
     overflow-x: hidden !important;
 }
+
+
+
+
