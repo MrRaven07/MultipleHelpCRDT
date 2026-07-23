@@ -153,6 +153,21 @@
 
 
 
+.room-display {
+    color: #ACBAC4;
+    font-size: 1rem;
+    font-family:'Courier New', Courier, monospace;
+    font-weight: bold;
+    letter-spacing: 1px;
+
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+
+
+
 
 /* CodeMirror overrides */
 .CodeMirror {

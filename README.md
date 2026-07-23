@@ -57,14 +57,14 @@ Roadmap:
 - [x] Connect the websockets with client-server architecture
 - [x] Plain text transmission, without CRDT 
 - [ ] ~~Start of the CvRDT~~ (will have to implement sequence CRDT in the future)
-- [ ] Implement G-Counter for the total number of keystrokes for each user
+- [x] Implement G-Counter for the total number of keystrokes for each user
 - [x] See the cursor position of each user with LWW
 - [ ] Implement Tombstoned LWW-Register in document Title
 - [ ] Import and save settings
 - [ ] Persistent informations between reloads of the page (stored efficiently) + locally saved rooms
 - [ ] Server side simulation of the delay in transmitting data and the repercussions in the frontend
-- [ ] Dropdown where will appear all the user names
-- [ ] Show in the `editor.html` page whats the name of the room
+- [x] Dropdown where will appear all the user names
+- [x] Show in the `editor.html` page what's the name of the room
 
 **Medium importance**
 - [x] Implementation of the markdown previewer (changed the textarea box with CodeMirror library)

@@ -9,6 +9,9 @@ App.Editor.init = () => {
     const saveBtn = document.getElementById('saveBtn');
     const fileImport = document.getElementById('fileImport');
 
+
+    document.getElementById('roomNameDisplay').innerText = `Room: ${App.State.docId}`;
+
     App.cmEditor = CodeMirror(editorInput, {
         lineNumbers: false, 
         lineWrapping: true, 
