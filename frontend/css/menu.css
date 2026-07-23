@@ -71,6 +71,20 @@
 }
 
 
+
+.history-link {
+    display: block;
+    background-color: #2d3556;
+    color: #F0F0DB;
+    text-decoration: none;
+    padding: 10px 15px;
+    margin-bottom: 8px;
+    border: 1px solid #ACBAC4;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+
+
 .localSaves {
     font-size: 1rem;
     margin-bottom: 15px;

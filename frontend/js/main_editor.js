@@ -10,6 +10,7 @@ if (!App.State.docId) {
     window.location.href = 'index.html';
 } 
 else {
+    localStorage.setItem(App.State.docId, Date.now().toString());
     App.Editor.init();
     App.Network.init();
 }

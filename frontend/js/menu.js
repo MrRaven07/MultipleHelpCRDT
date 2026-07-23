@@ -3,22 +3,37 @@
 
 App.Menu.loadRecentRooms = () => {
     const historyList = document.getElementById('historyList');
-    let foundRooms = false;
+
+
+    let rooms = [];
 
     for (let i = 0 ; i < localStorage.length; i++) {
         const key = localStorage.key(i);
         if (key.startsWith('doc_')) {
-            foundRooms = true;
-            const link = document.createElement('a');
-            link.href = `editor.html?doc=${key}`
-            link.innerText = `Resume: ${key}`
-            historyList.appendChild(link);
+            const timestamp = parseInt(localStorage.getItem(key)) || 0;
+            rooms.push({id: key, time: timestamp});
+
+
         }
     }
 
-    if (!foundRooms) {
-        historyList.innerHTML = "<p style='color: rgba(255, 104, 104, 0.5);'>No locally saved rooms found.</p>"
+    rooms.sort((a,b) => b.time - a.time);
+
+    if (rooms.length === 0){
+        historyList.innerHTML = "<p style='color: rgba(255, 104, 104, 0.5);'>No locally saved rooms found.</p>";
     }
+    else {
+        historyList.innerHTML = '';
+        rooms.forEach(room => {
+            const link = document.createElement('a');
+            link.href = `editor.html?doc=${room.id}`
+            link.innerText = `Resume: ${room.id}`
+
+            link.className = 'history-link';
+            historyList.appendChild(link);
+        });
+    }
+
 };
 
 
