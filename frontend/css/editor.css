@@ -99,6 +99,61 @@
 
 
 
+/* Roster Drop-up */
+
+.roster-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.roster-dropdown {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    /* The gap between the button and the menu */
+    margin-bottom: 15px;
+
+    background-color: #2d3556;
+    border: 2px solid #ACBAC4;
+    /* border-radius: 5px; */
+    padding: 10px;
+    width: max-content;
+    min-width: 150px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 100;
+
+}
+
+
+/* The effect will take place if both of the tags apply to an element */
+.roster-dropdown.hidden {
+    display: none;
+}
+
+.roster-user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #F0F0DB;
+    font-size: 0.9rem;
+}
+
+.user-color-dot {
+    width: 12px;
+    height: 12px;
+    /* border-radius: 50%; */
+}
+
+
+
+
+
 /* CodeMirror overrides */
 .CodeMirror {
     flex: 1;

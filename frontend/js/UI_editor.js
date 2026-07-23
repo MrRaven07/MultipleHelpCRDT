@@ -16,8 +16,6 @@ App.Editor.init = () => {
     });
     markdownOuput.innerHTML = marked.parse(App.cmEditor.getValue());
 
-    console.log(App.cmEditor);
-
     // When the cursor updates 
     App.cmEditor.on("cursorActivity", () => {
         const cursorPos = App.cmEditor.getCursor();
@@ -58,6 +56,15 @@ App.Editor.init = () => {
             return;
         
 
+        const myId = App.State.myUserDetails.id;
+        if(!App.State.numberKeystrokesGCounter[myId]){
+            App.State.numberKeystrokesGCounter[myId] = 0;
+        }
+
+        App.State.numberKeystrokesGCounter[myId] += 1;
+        App.Editor.updateRosterUI();
+
+
         const currentText = App.cmEditor.getValue();
 
         // Even though data is transmitted after some time, the keystrokes need to update instantly on the local machine
@@ -76,7 +83,9 @@ App.Editor.init = () => {
                     const syncMessage = { 
                         type: "sync", 
                         docId: App.State.docId, 
-                        text: App.State.pendingText 
+                        text: App.State.pendingText,
+                        userId: myId,
+                        keystrokes: App.State.numberKeystrokesGCounter[myId]
                     };
                     try { 
                         App.socket.send(JSON.stringify(syncMessage)); 
@@ -113,4 +122,47 @@ App.Editor.init = () => {
     saveBtn.addEventListener('click', () => { 
         // JSON blob parsing
     });
+
+
+
+
+
+
+
+    const rosterBtn = document.getElementById('rosterBtn');
+    const rosterList = document.getElementById('rosterList');
+
+    rosterBtn.addEventListener('click', () => {
+        rosterList.classList.toggle('hidden');
+    });
+
+    App.Editor.updateRosterUI = () => {
+        rosterList.innerHTML = '';
+        
+        
+        const myId = App.State.myUserDetails.id;
+        const myKeyStrokes = App.State.numberKeystrokesGCounter[myId] || 0;
+        
+
+        const selfself = document.createElement('div');
+        selfself.className = 'roster-user';
+        selfself.innerHTML = `<div class="user-color-dot" style="background-color: ${App.State.myUserDetails.color}"></div><span>${App.State.myUserDetails.id} (Self) - ${myKeyStrokes}</span>`;
+        rosterList.appendChild(selfself);
+        
+
+        App.State.activeUsers.forEach((user) => {
+            const peerKeyStrokes = App.State.numberKeystrokesGCounter[user.id] || 0;
+            const peer = document.createElement('div');
+            peer.className = 'roster-user';
+            peer.innerHTML = `<div class="user-color-dot" style="background-color: ${user.color}"></div><span>${user.id} - ${peerKeyStrokes}</span>`;
+            rosterList.appendChild(peer);
+        });
+
+        rosterBtn.innerText = `Users ${App.State.activeUsers.size + 1}`;
+
+    };
+
+    App.Editor.updateRosterUI();
+
+
 };

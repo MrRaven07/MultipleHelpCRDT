@@ -7,10 +7,12 @@ const App = {
     State: {
         myUserDetails: null,
         cursorMapLWW: {},
+        activeUsers: new Map(),
         isUpdatingFromNetwork: false,
         pendingText: null,
         isTimerRunning: false,
-        docId: new URLSearchParams(window.location.search).get('doc')
+        docId: new URLSearchParams(window.location.search).get('doc'),
+        numberKeystrokesGCounter: {}
     },
 
     // Global Core Objects

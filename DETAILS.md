@@ -103,3 +103,11 @@ cmEditor.on("change", () => {
 ex: `"# Hello world!"` into `<h1>Hello world</h1>` 
 
 ---
+
+**G-Counter implementation for the number of keystrokes**
+- All the users connected to a room maintain a Map of everyone's keystrokes
+- A user increment their own score upon writing
+- When a user 
+
+
+---

@@ -169,7 +169,7 @@ But for the moment the project will stick with plain html/css/js.
 
 The best explanation i could get for someone that just gets in the subject is the following:
 
-An user is playing an arcade game on a server.
+A user is playing an arcade game on a server.
 
 Naive version:
 The users sends information about each point obtained.
@@ -214,5 +214,33 @@ I found 2 models that could be used for a good looking and scalable project:
 - The Global Namespace Pattern
 - ES6 Modules Pattern
 
+
+---
+
+
+
+**See all of the connected users problem**
+
+I thought about the following: when a new user sends the join message they also have to include their userid and the cursor color (eventually).
+
+The server redirects that to all the other users and then one/more/or all the users send back to that user the current list. Afterwards, the new user can apply the LWW logic on all the received information.
+
+The problems with this:
+- if all the connected users send a large amount of data in the same time, the server may panic
+- if one of the users disconnects, but during that time, another one connects, he wont get the updated list (This problem might be exagerated. The lower protocols should handle this problem. When the user disconnects, back upon reconnecting, it should send again a join message. And, let's say, the user disconnects, but doesn't send any message to the server, the TCP connection won't be successful, as there won't be any ACKs, from my understanding)
+- the infrastructure relies entirely on the users that are connected and their integrity
+
+Another variant similar would be: the new users sends the userid and color, but each other user also send their `presence`, meaning the userId, the color and perhaps the text (the sequence CRDT is yet to be implemented, for now i think LWW would work). This method would have a lot more segments (i belive this is the PDU for the tcp protocol), but maybe they will be smaller and won't rely on a single user.
+
+Problems here:
+- if there won't be a proper verification, a user can send `presence` messages with random users until the Map fills up
+
+
+---
+
+**Initial update of the text problem**
+
+When a new user joins, they send a `join` message broadcast and wait for `presence` messages.
+The problem is that, when will the user stop updating its text.
 
 ---

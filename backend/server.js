@@ -55,14 +55,30 @@ wss.on('connection', (ws) => {
             if(!rooms.has(currentRoom)){
                 rooms.set(currentRoom, new Set());
             }
-            
+
             rooms.get(currentRoom).add(ws);
             console.log(`Client joined room: ${currentRoom}. Total users in room: ${rooms.get(currentRoom).size}`);
             
+
+
+            const usersInRoom = rooms.get(currentRoom);
+
+            // loop through everyone in the map
+            usersInRoom.forEach( (client) => {
+                if (client !== ws && client.readyState === WebSocket.OPEN)
+                    // Send the data as how it was received 
+                    client.send(messageAsString); 
+            });
+
         }
 
+
+
         // in case that an user tries to synchronize
-        else if (parsedMessage.type == 'sync' || parsedMessage.type == 'sync_cursor' ){
+        else if (parsedMessage.type == 'sync' || 
+            parsedMessage.type == 'sync_cursor' || 
+            parsedMessage.type == 'presence' || 
+            parsedMessage.type == 'leave'){
             
             // if the user tries to send data without joining a room, return
             if(!currentRoom)return;
