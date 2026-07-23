@@ -62,7 +62,6 @@ Roadmap:
 - [ ] Implement Tombstoned LWW-Register in document Title
 - [ ] Import and save settings
 - [ ] Persistent informations between reloads of the page (stored efficiently) + locally saved rooms
-- [ ] Server side simulation of the delay in transmitting data and the repercussions in the frontend
 - [x] Dropdown where will appear all the user names
 - [x] Show in the `editor.html` page what's the name of the room
 
@@ -71,18 +70,21 @@ Roadmap:
 - [ ] Separate and complete `QUESTIONS.md` and `DETAILS.md`
 - [ ] Try to put the WebSocket server on a docker/podman container
 - [x] Separation of the `style.css` files for `index.html` and `editor.html`
+- [ ] Server side simulation of the delay in transmitting data and the repercussions in the frontend
 
 **Low importance**
 - [ ] Change the UI/UX style
 - [ ] Changeable color palettes
 - [ ] Test the application with a large number of containers (users)
-
+- [ ] Save the markdown format as .pdf
+- [ ] Save the markdown format as .md
 ---
 
 Bugs:
-- [ ] Scroll of the markdown previewer
+- [x] Scroll of the markdown previewer
 - [x] When a long word appears (ex: AAAAAAAAAAAAAAAAAA) it doesn't wrap to the next line, instead it pushes the `<div>` on the right.
 - [ ] 3 users connected, they type for some time, but suddenly one of the users disconnects and the page refreshes. Upon reconnect this user won't have the latest version and if they write something, the context refreshes to all the other instances. (THIS IS PRE SAVING AND CRDT LOGIC) 
+- [ ] When a user joins a room, he won't be synced with all the text, until another user types
 
 --- 
 

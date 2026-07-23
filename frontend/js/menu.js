@@ -12,19 +12,25 @@ App.Menu.loadRecentRooms = () => {
         if (key.startsWith('doc_')) {
             const timestamp = parseInt(localStorage.getItem(key)) || 0;
             rooms.push({id: key, time: timestamp});
-
-
         }
     }
 
     rooms.sort((a,b) => b.time - a.time);
 
-    if (rooms.length === 0){
+    const topRooms = rooms.slice(0, 5);
+    const garbageRooms = rooms.slice(7);
+
+    garbageRooms.forEach(room => {
+        localStorage.removeItem(room.id);
+    });
+
+    
+    if (topRooms.length === 0){
         historyList.innerHTML = "<p style='color: rgba(255, 104, 104, 0.5);'>No locally saved rooms found.</p>";
     }
     else {
         historyList.innerHTML = '';
-        rooms.forEach(room => {
+        topRooms.forEach(room => {
             const link = document.createElement('a');
             link.href = `editor.html?doc=${room.id}`
             link.innerText = `Resume: ${room.id}`
@@ -32,6 +38,7 @@ App.Menu.loadRecentRooms = () => {
             link.className = 'history-link';
             historyList.appendChild(link);
         });
+
     }
 
 };
@@ -50,6 +57,27 @@ App.Menu.init = () => {
         /* window.location.href tells the browser to change the URL and load a new page */
         /* the backticks ` allow to put the formatted text with ${} */
         window.location.href = `editor.html?doc=${randomDocId}`;
+    });
+
+
+
+    const clearHistoryBtn = document.getElementById('clearHistoryBtn');
+    clearHistoryBtn.addEventListener('click', () => {
+
+        /* 
+        Firstly, all the items that must be delete have to be included in a list
+        This is done because if one deletes an item from localStorage, the rest of the list 
+        will fill that space.
+        */ 
+        const keysToRemove = [];
+        for(let i=0; i<localStorage.length; i++){
+            const key = localStorage.key(i);
+            if(key.startsWith('doc_')){
+                keysToRemove.push(key);
+            }
+        }        
+        keysToRemove.forEach(key => localStorage.removeItem(key));
+        App.Menu.loadRecentRooms();
     });
 
 

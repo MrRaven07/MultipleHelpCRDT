@@ -63,12 +63,39 @@
 
 
 
+
+
 .history-section {
     margin-top: 40px;
     text-align: left; 
     border-top: 1px solid #ACBAC4;
     padding-top: 20px;
 }
+
+
+
+.history-header {
+    display: flex;
+    justify-content: space-between; /* text on the left - button on the right */
+    align-items: center;            /* center -> vertically */
+    margin-bottom: 15px;
+}
+
+.clear-btn {
+    padding: 5px 12px;
+    font-size: 0.8rem;
+    background-color: transparent;
+    border: 1px solid rgba(255, 104, 104, 0.5);
+    transition: all 0.1s;
+}
+
+.clear-btn:hover{
+    background-color: rgba(255, 104, 104, 0.2);
+    color: #ff6868;
+    border-color: #ff6868;
+}
+
+
 
 
 

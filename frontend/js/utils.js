@@ -5,11 +5,11 @@ App.Utils.generateUser = () => {
     const adjectives = [
         'Glitchy', 'Overclocked', 'Laggy', 'Deprecated', 'Headless', 'Throttled', 'Bootlooping',
         'Pixelated', 'Encrypted', 'Buggy', 'Hardcoded', 'Bypassed', 'Frozen', 'Bricked',
-        'Zipped', 'Cached', 'Caffeinated', 'Derpy', 'Sweaty', 'Chunky', 'Sassy', 'Wobbly',
-        'Squeaky', 'Grumpy', 'Fluffy', 'Majestic', 'Awkward', 'Zesty', 'Snarky', 'Jittery',
-        'Panicking', 'Soggy', 'Crusty', 'Wacky', 'Bouncy', 'Sneaky', 'Dizzy', 'Fidgety',
+        'Zipped', 'Cached', 'Caffeinated', 'Derpy', 'Sweaty', 'Chunky', 'Sweetie', 'Wobbly',
+        'Squeaky', 'Grumpy', 'Fluffy', 'Majestic', 'Awkward', 'DJ', 'MC', 'Snarky', 'Jittery',
+        'Panicking', 'Soggy', 'Crusty', 'Wacky', 'Bouncy', 'Sneaky', 'Dizzy', 'Slimy',
         'Lopsided', 'Noodly', 'Radioactive', 'Sputtering', 'Screaming', 'Leaky', 'Smelly',
-        'Dazzling', 'Baffled', 'Giggling', 'Hiccuping', 'Jumbled'
+        'Dazzling', 'Baffled', 'Giggling', 'Moisty', 'Jumbled'
     ];
     
     const nouns = [
@@ -19,7 +19,8 @@ App.Utils.generateUser = () => {
         'Sandbox', 'Compiler', 'Byte', 'Framework', 'Node', 'Socket', 'Cloud',
         'Malware', 'Exception', 'Pointer', 'Stack', 'Capacitor', 'Transistor',
         'Penguin', 'Sloth', 'Badger', 'Wombat', 'Platypus', 'Weasel', 'Alpaca',
-        'Capybara', 'Lemur', 'Meerkat', 'Opossum', 'Otter', 'Raccoon', 'Walrus', 'Yeti'
+        'Capybara', 'Lemur', 'Meerkat', 'Opossum', 'Otter', 'Raccoon', 'Walrus', 'Yeti',
+        'Predator'
     ];
     
     const randomAdj = adjectives[Math.floor(Math.random() * adjectives.length)];

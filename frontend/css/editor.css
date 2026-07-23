@@ -6,11 +6,15 @@
     flex-direction: column;
     height: 100vh;
     width: 100vw;
+    overflow: hidden;   /* Prevents the main browser window from getting a scrollbar */
 }
 
 .workspace {
     display: flex;
     flex: 1;
+    flex-direction: row;
+    min-height: 0;
+    overflow: hidden;
     width: 100%;
 }
 
@@ -19,6 +23,9 @@
     display: flex;
     flex-direction: column;
     padding: 20px;
+
+    min-height: 0;
+    overflow: hidden;
 }
 
 .right-panel {
@@ -30,10 +37,19 @@
     display: flex;
     height: 100%;
     flex-direction: column;
+
+    min-height: 0;
+    overflow: hidden;
 }
 
 #editorInput {
     flex: 1;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+ 
+ 
     background-color: transparent;
     color: #ACBAC4;
     border: none;
@@ -65,12 +81,25 @@
 
 
 
+#markdownOutput {
+    flex: 1;
+    overflow-y: auto;
+    min-height: 0;
+    padding: 10px;
+    color: #F0F0DB;
+
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-all;
+}
 
 
 
 /* Taskbar */
 
 .taskbar {
+    flex-shrink: 0;
+
     height: 70px;
     border-top: 3px solid #ACBAC4;
     display: flex;
@@ -169,10 +198,17 @@
 
 
 
+
+
+
+
 /* CodeMirror overrides */
 .CodeMirror {
+    width: 100%;
+    height: 100% !important;
     flex: 1;
-    height: auto;
+    min-height: 0;  /* Prevents the flexbox from expanding a lot more */
+    
     background-color: transparent !important;
     color: #ACBAC4 !important;
     font-family: 'Courier New', Courier, monospace !important;
@@ -199,4 +235,9 @@
 .CodeMirror-scroll{
     border: none;
     outline: none;
+
+    height: 100% !important;
+
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
 }
