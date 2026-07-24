@@ -18,25 +18,25 @@ From the darkest to the lightest:
 **How does the backend (should) work?**
 
 1. The connection
-A browser opens a WebSocket to the server.
-The server answers, but it doesn't know yet who the browser is and the document they want to edit.
+   + A browser opens a WebSocket to the server.
+   + The server answers, but it doesn't know yet who the browser is and the document they want to edit.
 
 2. The handshake
-The browser sends a JSON request saying that it wants to connect to a specific room (ex: doc_123456)
+   + The browser sends a JSON request saying that it wants to connect to a specific room (ex: doc_123456)
 
 3. The registry 
-The server verifies if the room already exists in a list. If it doesn't, the server creates a new one, then it adds the browser's connection to that room.
+   + The server verifies if the room already exists in a list. If it doesn't, the server creates a new one, then it adds the browser's connection to that room.
 
 4. The relay
-When the browser sends an update (for every key pressed), the server searches in the list all the other browsers connected to the room and forwards the message to them.
+   + When the browser sends an update (for every key pressed), the server searches in the list all the other browsers connected to the room and forwards the message to them.
 
 5. The cleanup
-When a browser closes the tab, the server erases them from the list.
+   + When a browser closes the tab, the server erases them from the list.
 
 ---
 
 **What's the difference between CvRDT and CmRDT?**
-_Taken from the `README/md`_
+_Taken from the `README.md`_
 There are 2 architectures of CRDT:
 - CvRDT (`convergent replicated data types`) The whole JSON object is being sent at each modification, then a merge function compares the 2 versions. 
 Pros & Cons: relatively easy to use, but sends all the informatios every time
@@ -46,6 +46,13 @@ Pros & Cons Fast at sending, hard to implement and if a message is lost, the use
 ---
 
 **How does GCounter works and where can it be used?**
+
+---
+
+**G-Counter implementation for the number of keystrokes**
+- All the users connected to a room maintain a Map of everyone's keystrokes
+- A user increment their own score upon writing
+- When a user receives values from the network, they compare it to their dictionary and keep the maximum value for each persons
 
 ---
 
@@ -69,7 +76,6 @@ It does that with DOM injection. CodeMirror injects 2 layers inside the `<div>`:
 
 
 `lineNumbers: ...,` : tells CodeMirror not to render the vertical line numbering (that appears on almost all code editors)
-
 
 `lineWrapping: true,` : wrap the text to the next line instead of going off-screen
 
@@ -101,13 +107,5 @@ cmEditor.on("change", () => {
 
 `marked.parse()` : converts Markdown syntax into HTML tags
 ex: `"# Hello world!"` into `<h1>Hello world</h1>` 
-
----
-
-**G-Counter implementation for the number of keystrokes**
-- All the users connected to a room maintain a Map of everyone's keystrokes
-- A user increment their own score upon writing
-- When a user receives values from the network, they compare it to their dictionary and keep the maximum value for each persons
-
 
 ---

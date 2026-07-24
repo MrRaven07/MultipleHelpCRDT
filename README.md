@@ -5,8 +5,13 @@ An example of a CRDT (Conflict-free replicated data type) web based program. Sim
 ---
 
 ### Longer description
-The purpose of the project is to let 2 or multiple users type something concurrently/simultaneously and in the end save that informations in multiple types. 
+The purpose of the project is to let 2 or more users type something concurrently/simultaneously and in the end save that informations in multiple types.
+The webpage uses more CRDT logic (like GCounter for the number of keystrokes and LWW for the cursors of the users) 
 
+---
+
+snapshot2026-07-24.png
+![](./README_images/snapshot2026-07-24.png)
 
 ---
 ### Short explanation on the types of CRDT
@@ -36,34 +41,41 @@ Registers (Stores a single value):
 ---
 
 Things i think that will be difficult:
-- the communication between different devices
-- the UI (i will choose vanilla css/js as other frontend frameworks seem to be beyond the project scope)
+- the communication between different devices 
+- how the UI will look 
+  + ended up using chose vanilla html/css/js as other frontend frameworks seem to be beyond the project scope
 - how will all the keys be stored
+  + As of 25/07/2026 the Sequence CRDT is not implemented and the keys are stored as plain text transmitted in the JSON
 - how to differentiate between the keys pressed by each user
 - the most common problem of 2 devices pressing keys in the same time
 - if there will be problems with the cursor of the users (how will the cursor staying behind be solved)
+  + The possition is saved and incremented if there were letters added before it
 - how would an undo stack work in here  
 - how copy and paste would work
 - how to properly make the text box (As i don't know if a simple html text box would cut it. And coding a text box from scratch seems way much more than i anticipated from this project (Alignment, fonts, selection) ; but in the end i whink i will stick with `<textarea>` )
+  + used the `codemirror` library for the problem with the `<textarea>` as this couldn't provide enough informations about where the user cursor is in that moment
 - the almost infinite expansion of the project (tombstone accumulation ; where tombstones are the letters that were deleted. For example, if i copy pasted the entire Godfather I movie script/subtitles and after that deleted everything, there will be a lot of tombstones, which will occupy space for almost nothing)
 
 ---
 
-Roadmap:
+### Roadmap:
 
 **High importance**
 - [x] Make a simple dummy starter code for the frontend
-- [x] Create the server with Node.js WebSockets which just receives and sends data between the devices/people connected
+- [x] Create the server with `Node.js WebSockets` which just receives and sends data between the devices/people connected
 - [x] Connect the websockets with client-server architecture
 - [x] Plain text transmission, without CRDT 
 - [ ] ~~Start of the CvRDT~~ (will have to implement sequence CRDT in the future)
 - [x] Implement G-Counter for the total number of keystrokes for each user
 - [x] See the cursor position of each user with LWW
-- [ ] Implement Tombstoned LWW-Register in document Title
-- [ ] Import and save settings
-- [ ] Persistent informations between reloads of the page (stored efficiently) + locally saved rooms
+- [ ] Create a small document title of each room
+- [ ] Implement Tombstoned LWW-Register for the document Title
+- [ ] Import and save settings (How many users worked, the keystrokes, what each of them typed)
+- [ ] Persistent informations between reloads of the page (stored efficiently)
+- [x] Save the recent accesed rooms
 - [x] Dropdown where will appear all the user names
 - [x] Show in the `editor.html` page what's the name of the room
+- [ ] Make the page available on a webserver
 
 **Medium importance**
 - [x] Implementation of the markdown previewer (changed the textarea box with CodeMirror library)
@@ -72,35 +84,40 @@ Roadmap:
 - [x] Separation of the `style.css` files for `index.html` and `editor.html`
 - [ ] Server side simulation of the delay in transmitting data and the repercussions in the frontend
 - [ ] Make the UI of the scrollbar more appealing (improve the default UI)
+- [ ] When a room is created, the user can choose if the communication will be CvRDT or CmRDT for the text
 
 **Low importance**
-- [ ] Change the UI/UX style
+- [x] Change/Improve the UI/UX style
 - [ ] Changeable color palettes
 - [ ] Test the application with a large number of containers (users)
-- [ ] Save the markdown format as .pdf
-- [ ] Save the markdown format as .md
+- [x] Save the markdown format as .pdf
+- [x] Save the markdown format as .md
+
 ---
 
-Bugs:
+**Bugs:**
 - [x] Scroll of the markdown previewer
 - [x] When a long word appears (ex: AAAAAAAAAAAAAAAAAA) it doesn't wrap to the next line, instead it pushes the `<div>` on the right.
 - [ ] 3 users connected, they type for some time, but suddenly one of the users disconnects and the page refreshes. Upon reconnect this user won't have the latest version and if they write something, the context refreshes to all the other instances. (THIS IS PRE SAVING AND CRDT LOGIC) 
 - [ ] When a user joins a room, he won't be synced with all the text, until another user types
 
+
 --- 
 
-### Possible workflows of the app usage (and storing of the files) (we consider 2 persons, Alice and Bob):
-- Alice opens `localhost:XXXX`. The page redirects her to a new room/subdomain `localhost:XXXX/?doc=super-project`
-- Alice imports her `.json` file she saved previously and the screen populates with text
+### The workflow of the page usage (and storing of the files) (we consider 2 persons, Alice and Bob):
+- The `index.html` page let's the user choose the room number, or gives one random
+- Alice gives Bob the page id 
 - Bob connects to the same link as Alice `localhost:XXXX/?doc=super-project`. The two share the same state because of the WebSocket room
 - They type together, everything being stored localy
-- When they are done, Bob clicks "Download" to save the `.json` to his computer 
+- When they are done, Bob clicks "Download" to save the `.md` / `.pdf` to his computer 
+
 ---
 
 ### AI usage throughout the project:
 
-Everything in the project has been written by hand, on the keyboard. Even though some things were from an AI response, i've read the answers, thought about how and if the answer is usefull and wrote it again. 
+Everything in the project has been written by hand, on the keyboard. Even though some things were from an AI response, i've read the answers, thought about how and if the answer is useful and wrote it again. 
 At least this is the current mentality, we will see how this progresses.
+
 
 Even though the current `README` might look like it was AI generated, it wasn't. (This might be because in the past i wanted to make `READMEs` more appealing and inspired from AI creations.) 
 
@@ -111,7 +128,7 @@ Even though the current `README` might look like it was AI generated, it wasn't.
 - https://framapad.org/abc/en/
 
 --- 
-Bibliography:
+### Bibliography:
 - https://crdt.tech/resources
 - https://en.wikipedia.org/wiki/Conflict-free_replicated_data_type
 - Google Gemini - https://gemini.google.com/ :

@@ -228,12 +228,26 @@ This is an object, an array would have `[]`, and an object (acts like a map) use
 
 **More about node.js**
 
+
+
+
+**What is `node_modules`?**
+
+Node.js relies on modules, reusable blocks of javascript code.
+
+When one runs a command like `npm install express` , the following will happen:
+- the `express` code will download
+- creates a massive `node_modules` folder and puts the code inside 
+
+Because node.js relies on modules, a single module may rely on many others (and it would download a whole lot more things).
+
+
 ---
 
 **What about the js programming models?**
 
 I found 2 models that could be used for a good looking and scalable project:
-- The Global Namespace Pattern
+- The Global Namespace Pattern (this is the one that the project ended up using)
 - ES6 Modules Pattern
 
 
