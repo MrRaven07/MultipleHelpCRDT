@@ -13,6 +13,22 @@ The webpage uses more CRDT logic (like GCounter for the number of keystrokes and
 snapshot2026-07-24.png
 ![](./README_images/snapshot2026-07-24.png)
 
+
+---
+
+**How to run the page?**
+- Navigate to the `backend` directory and install the required Node.js packages (that being `ws`):
+```bash
+npm install
+```
+- Start the server with the following command in the same directory (that being ./backend)
+```bash
+npm server.js
+```
+- After that, there should appear a confirmation message in the console that the server is running on ws://localhost:7053
+
+- Launch the webpage by accessing `index.html`
+
 ---
 ### Short explanation on the types of CRDT
 There are 2 architectures of CRDT:
