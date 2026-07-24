@@ -19,6 +19,10 @@ App.Editor.init = () => {
 
     // When the cursor updates 
     App.cmEditor.on("cursorActivity", () => {
+
+        if(App.State.isUpdatingFromNetwork)
+            return;
+
         const cursorPos = App.cmEditor.getCursor();
         const cursorMessage = {
             type: "sync_cursor", 
@@ -197,3 +201,5 @@ App.Editor.init = () => {
 
 
 };
+
+

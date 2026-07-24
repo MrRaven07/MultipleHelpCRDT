@@ -97,8 +97,27 @@ App.Network.init = () => {
         
         // sync/update the text
         if (incomingData.type === 'sync') {
+            // if the sender is also the receiver, that being self
+            if(incomingData.userId === App.State.myUserDetails.id)
+                return;
+            
             App.State.isUpdatingFromNetwork = true;
+
+            const localCursor = App.cmEditor.getCursor();
+
             App.cmEditor.setValue(incomingData.text);
+
+            App.cmEditor.setCursor(localCursor);
+            
+            for(const [userId, data] of Object.entries(App.State.cursorMapLWW)){
+                const cursorElement = App.Utils.createCursorSpan(data.color);
+
+                const newMarker = App.cmEditor.setBookmark(data.lastPos, {widget: cursorElement});
+                App.State.cursorMapLWW[userId].marker = newMarker;
+            }
+
+
+
             document.getElementById('markdownOutput').innerHTML = marked.parse(incomingData.text);
             App.State.isUpdatingFromNetwork = false;            
 
@@ -141,17 +160,16 @@ App.Network.init = () => {
                     App.State.cursorMapLWW[userId].marker.clear();
                 }
                 
-                const cursorElement = document.createElement('span');
-                cursorElement.className = 'remote-cursor';
-                cursorElement.style.borderLeft = `2px solid ${color || '#ff0000'}`;
-                cursorElement.style.height = '1.2em';
-                cursorElement.style.display = 'inline-block';
+                const cursorElement = App.Utils.createCursorSpan(color);
+
                 
                 const newMarker = App.cmEditor.setBookmark(position, { widget: cursorElement });
                 
                 App.State.cursorMapLWW[userId] = { 
                     timestamp: timestamp, 
-                    marker: newMarker 
+                    marker: newMarker,
+                    color: color || '#000000',
+                    lastPos: position
                 };
             }
         }

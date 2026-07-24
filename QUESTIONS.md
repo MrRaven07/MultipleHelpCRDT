@@ -97,12 +97,12 @@ The `@keyframes` part:
     It's rarely used for CSS styling `#editor-input` , as CSS makes it hard for it to be overwritten in the future.
     It's good to use `id` for the following things:
     + JS hooks `document.getElementById('submit-btn')`
-    + Anchor links `<a href="#contact-links">
+    + Anchor links `<a href="#contact-links">`
 
 
 ---
 
----
+
 **Would the following code be necessary in JS?**
 ```
 // Waits for the HTML to fully load before running
@@ -158,6 +158,12 @@ importBtn.addEventListener('click', () => {
 
 **What's the difference between Sockets and WebSockets?**
 
+- `Sockets` represent the low-level network concept of transmitting data. They operate at layer 4 iso/osi
+- A `WebSocket` is a protocol built on top of standard sockets to give web browsers a method to have this utility. They operate at layer 7 iso/osi
+
+Web browsers are forbidden frop opening TCP sockets for security reasons. If a browser could read raw sockets, a bad-intended website could scan the local network.
+
+A WebSocket starts as a standard HTTP request. The browser sends an HTTP `GET` request asking the server if they could upgrade the connection to a WebSocket one. Unline raw sockets, websockets wrap the data in `frames`, so the browser knows the beginning and the end of it.
 
 ---
 
@@ -181,7 +187,7 @@ But for the moment the project will stick with plain html/css/js.
 
 ---
 
-**What's GCounter? (in detail)**
+**What's GCounter? (in more details)**
 
 The best explanation i could get for someone that just gets in the subject is the following:
 

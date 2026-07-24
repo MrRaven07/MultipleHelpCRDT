@@ -212,9 +212,18 @@
 
 
 @media print {
-    .left-panel, .taskbar, .room-display {
+    .left-panel, #editorContainer, .CodeMirror, .taskbar, .room-display {
         display: none !important;
     }
+
+    .right-panel {
+        width: 100% !important;
+        max-width: 100% !important;
+        flex: 1 0 auto !important;
+        border: none !important;
+        padding: 0 !important;
+    }
+
     ::-webkit-scrollbar{
         display: none !important;
     }

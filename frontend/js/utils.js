@@ -39,3 +39,15 @@ App.Utils.generateUser = () => {
         color: randomColor
     };
 };
+
+
+
+App.Utils.createCursorSpan = (color) => {
+    const cursorElement = document.createElement('span');
+    cursorElement.className = 'remote-cursor';
+    cursorElement.style.borderLeft = `2px solid ${color || '#000000'}`;
+    cursorElement.style.height = '1.2em';
+    cursorElement.style.display = 'inline-block';
+    return cursorElement;
+}
+
